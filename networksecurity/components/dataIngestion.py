@@ -35,7 +35,7 @@ class DataIngestion:
             df=pd.DataFrame(list(collection.find()))
 
             if"_id" in df.columns.to_list():
-                df = df.drop(columns=["_id"],axis=1) ### Because while reading mongo db data we by default _id column gets created
+                df = df.drop(columns=["_id"]) ### Because while reading mongo db data we by default _id column gets created
             df.replace({"na":np.nan},inplace=True)
             return df
         except Exception as e:
