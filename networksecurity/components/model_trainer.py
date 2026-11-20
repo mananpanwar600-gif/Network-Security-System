@@ -23,7 +23,7 @@ from sklearn.ensemble import(
 )
 
 import dagshub
-dagshub.init(repo_owner='manansinghpanwar-3', repo_name='Network-Security-System', mlflow=True)
+dagshub.init(repo_owner='mananpanwar600-gif', repo_name='Network-Security-System', mlflow=True)
 
 
 class ModelTrainer:
@@ -35,11 +35,14 @@ class ModelTrainer:
             raise NetworkSecurityException(e,sys)
 
     def track_mlflow(self,best_model,classificationmetric):
+        mlflow.set_experiment("Network-Security-System")
         with mlflow.start_run():
+            accuracy = classificationmetric.accuracy
             f1_score = classificationmetric.f1_score
             precision_score = classificationmetric.precision_score
             recall_score = classificationmetric.recall_score
 
+            mlflow.log_metric("accuracy",accuracy)
             mlflow.log_metric("f1_score",f1_score)
             mlflow.log_metric("precision_score",precision_score)
             mlflow.log_metric("recall_score",recall_score)
@@ -152,5 +155,6 @@ class ModelTrainer:
             )
 
             model = self.train_model(x_train,y_train,x_test,y_test)
+            return model
         except Exception as e:
             raise NetworkSecurityException(e,sys)

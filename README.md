@@ -173,6 +173,7 @@ The project evaluates several classifiers, including:
 - Gradient Boosting
 - Logistic Regression
 - AdaBoost
+- ANN
 
 The best-performing model is selected and saved as the final trained model for inference.
 
